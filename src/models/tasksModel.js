@@ -18,7 +18,16 @@ const createTask = async (task) => {
     return {insertId: createdTask.insertId}; // retorna apenas o id da task criada
 };
 
+const deleteTask = async (id) => { // recebe o id da task que vai ser excluida
+    const query = 'DELETE FROM tasks WHERE id = ?';
+
+    const [deletedTask] = await connection.execute(query, [id]);
+
+    return deletedTask;
+};
+
 module.exports = { // exportando as funções de acesso ao banco
     getAll,
     createTask,
+    deleteTask,
 };

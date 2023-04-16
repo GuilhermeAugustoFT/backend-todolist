@@ -13,7 +13,16 @@ const createTask = async (req, res) => {
     return res.status(201).json(createdTask); // retorna informações sobre a task criada, com o status 201 (CREATED)
 };
 
+const deleteTask = async (req, res) => {
+    const { id } = req.params; // retira o id dos paramentros da requisição
+    
+    await tasksModel.deleteTask(id);
+
+    return res.status(200).json(); // retorna o status 200 (OK)
+};
+
 module.exports = {
     getAll,
     createTask,
+    deleteTask
 };

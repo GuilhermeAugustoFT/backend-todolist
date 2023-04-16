@@ -7,5 +7,6 @@ const tasksMiddleware = require('./middlewares/tasksMiddleware'); // importa o c
 
 router.get('/tasks', tasksController.getAll); // quando a rota for '/tasks' e GET, chama a função de pegar todas as tasks do controller
 router.post('/tasks', tasksMiddleware.validadeBody, tasksController.createTask); // quando a rota for '/tasks' e POST, primeiro valida o body através do middleware, e se tudo ok, chama a função de criar uma nova task
+router.delete('/tasks/:id', tasksController.deleteTask); // quando a rota for '/tasks' e delete, recebe um id no parametro e chama a função de deletar uma task
 
 module.exports = router; // exporta o router para os arquivos que precisarem
