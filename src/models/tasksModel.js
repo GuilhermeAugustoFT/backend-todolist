@@ -26,8 +26,20 @@ const deleteTask = async (id) => { // recebe o id da task que vai ser excluida
     return deletedTask;
 };
 
+const updateTask = async (id, task) => { // recebe o id da task que vai ser atualizada e os novos dados da task
+    const { title, status } = task; // retira dos novos dados da task o novo titulo e o novo status
+    
+    const query = 'UPDATE tasks SET title = ?, status = ? WHERE id = ?'; // prepara a query de atualização da task
+    // query ficará assim: 'UPDATE tasks SET title = task.title, status = task.status, WHERE id = id';
+
+    const [updatedTask] = await connection.execute(query, [title, status, id]); // preenche as informações (?) da query
+
+    return updatedTask;
+};
+
 module.exports = { // exportando as funções de acesso ao banco
     getAll,
     createTask,
     deleteTask,
+    updateTask,
 };

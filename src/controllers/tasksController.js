@@ -14,15 +14,24 @@ const createTask = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-    const { id } = req.params; // retira o id dos paramentros da requisição
-    
+    const { id } = req.params; // retira o id dos parametros da requisição
+
     await tasksModel.deleteTask(id);
 
     return res.status(200).json(); // retorna o status 200 (OK)
 };
 
+const updateTask = async (req, res) => {
+    const { id } = req.params; // retorna o id da tasks que será atualizada dos parametros da requisição
+    
+    await tasksModel.updateTask(id, req.body);
+
+    return res.status(200).json(); // retorn o status 200 (OK)
+};
+
 module.exports = {
     getAll,
     createTask,
-    deleteTask
+    deleteTask,
+    updateTask
 };
