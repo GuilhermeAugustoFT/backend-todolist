@@ -5,6 +5,7 @@ const tasksController = require('./controllers/tasksController'); // importa o c
 const tasksMiddleware = require('./middlewares/tasksMiddleware'); // importa o controller de tasks
 const usersController = require('./controllers/usersController');
 const usersMiddleware = require('./middlewares/usersMiddleware'); 
+const userTaskController = require('./controllers/userTaskController');
 
 // TASKS
 router.get('/tasks', tasksController.getAll); // quando a rota for '/tasks' e GET, chama a função de pegar todas as tasks do controller
@@ -19,5 +20,10 @@ router.get('/users/:id', usersController.getUserById);
 router.post('/users', usersMiddleware.validadeBody, usersController.createUser);
 router.put('/users/:id', usersMiddleware.validadeBody, usersController.updateUser);
 router.delete('/users/:id', usersController.deleteUser);
+
+// USER_TASKS
+router.get('/userTasks', userTaskController.getAll);
+router.get('/userTasks/:userId', userTaskController.getTasksByUser);
+router.get('/taskUser/:taskId', userTaskController.getUserByTask);
 
 module.exports = router; // exporta o router para os arquivos que precisarem
