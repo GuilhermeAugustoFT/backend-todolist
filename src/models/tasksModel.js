@@ -25,7 +25,6 @@ const createTask = async (task) => {
 };
 
 const deleteTask = async (id) => { // recebe o id da task que vai ser excluida
-    console.log(id);
     const query = 'DELETE FROM tasks WHERE id = ?';
 
     const [deletedTask] = await connection.execute(query, [id]);

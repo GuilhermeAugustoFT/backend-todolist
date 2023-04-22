@@ -38,7 +38,7 @@ const createTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     try {
         const { id } = req.params; // retira o id dos parametros da requisição
-        await userTaskModel.deleteUserTask(id);
+        await userTaskModel.deleteUserTask(id); // removendo da tabela de relação primeiro, pois é primary key
         await tasksModel.deleteTask(id);
     }
     catch (err) {
