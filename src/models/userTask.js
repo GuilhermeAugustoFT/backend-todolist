@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const getAll = async () => {
-    const query = 'SELECT * FROM ut';
+    const query = 'SELECT * FROM user_task';
     const [userTask]= await connection.execute(query);
     return userTask;
 };
@@ -24,9 +24,9 @@ const createUserTask = async (userId, taskId) => { // usar internamente na API
     return createdUserTask;
 };
 
-const deleteUserTask = async (userId, taskId) => { // usar internamente na API
-    const query = 'DELETE FROM user_task WHERE user_id = ? AND task_id = ?';
-    const [deletedUserTask] = await connection.execute(query, [userId, taskId]);
+const deleteUserTask = async (taskId) => { // usar internamente na API
+    const query = 'DELETE FROM user_task WHERE task_id = ?';
+    const [deletedUserTask] = await connection.execute(query, [taskId]);
     return deletedUserTask;
 };
 

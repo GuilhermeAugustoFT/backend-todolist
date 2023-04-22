@@ -26,7 +26,19 @@ const validateStatus = (req, res, next) => { // função de validação, valida 
     next(); // caso não caia em nenhum cenário de erro, termina a validação e permite a continuação do sistema
 };
 
+const validateUserId = (req, res, next) => { 
+    const { body } = req; 
+
+    if(body.userId === undefined) { 
+        return res.status(400).json({ message: 'The field "userId" is required' }); 
+    }
+
+    next(); 
+};
+
+
 module.exports = { 
     validateTitle,
-    validateStatus
+    validateStatus,
+    validateUserId
 };

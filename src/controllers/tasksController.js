@@ -1,4 +1,5 @@
 const tasksModel = require('../models/tasksModel'); // importa a model de tasks
+const userTaskModel = require('../models/userTask');
 
 const getAll = async (req, res) => {
     try {
@@ -24,7 +25,9 @@ const getTaskById = async (req, res) => {
 
 const createTask = async (req, res) => {
     try {
+        const { userId } = req.body;
         const createdTask = await tasksModel.createTask(req.body); // pega o body da requisição e passa para o método de criação de tarefas
+        await userTaskModel.createUserTask(userId, createdTask.insertId); // adiciona na tabela de relação
         return res.status(201).json(createdTask); // retorna informações sobre a task criada, com o status 201 (CREATED)
     }
     catch (err) {
@@ -35,6 +38,7 @@ const createTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     try {
         const { id } = req.params; // retira o id dos parametros da requisição
+        await userTaskModel.deleteUserTask(id);
         await tasksModel.deleteTask(id);
     }
     catch (err) {
