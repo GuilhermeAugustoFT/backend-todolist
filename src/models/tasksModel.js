@@ -7,6 +7,12 @@ const getAll = async () => {
     return tasks;
 };
 
+const getTaskById = async (id) => {
+    const query = 'SELECT * FROM tasks WHERE id = ?';
+    const [task] = await connection.execute(query, [id]);
+    return task;
+};
+
 const createTask = async (task) => {
     const { title } = task; // retira o status da task e salva na variavel title
     const query = 'INSERT INTO tasks(title, status, createdAt) VALUES (?, ?, ?)';
@@ -39,6 +45,7 @@ const updateTask = async (id, task) => { // recebe o id da task que vai ser atua
 
 module.exports = { // exportando as funções de acesso ao banco
     getAll,
+    getTaskById,
     createTask,
     deleteTask,
     updateTask,
